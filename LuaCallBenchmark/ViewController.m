@@ -180,6 +180,121 @@ static int report (lua_State *L, int status) {
 	NSLog(@"Elapsed time for LuaEmptyCall (ms): %d", elapsed_time);
 }
 
+- (IBAction) benchmarkLuaAddFunction:(id)the_sender
+{
+	int elapsed_time;
+	struct lua_State* lua_state;
+	int ret_flag;
+	AppDelegate* app_delegate;
+	app_delegate = [[UIApplication sharedApplication] delegate];
+	lua_state = [app_delegate luaState];
+	
+	/* Collect full to make sure benchmark is in clean state before running. */
+	lua_gc(lua_state, LUA_GCCOLLECT, 0);
+	
+	lua_getglobal(lua_state, "BenchmarkLuaAddFunction");
+	ret_flag = lua_pcall(lua_state, 0, 1, 0);
+	if(0 != ret_flag)
+	{
+		report(lua_state, ret_flag);
+	}
+	elapsed_time = lua_tointeger(lua_state, -1);
+	lua_pop(lua_state, 1);
+	NSLog(@"Elapsed time for BenchmarkLuaAddFunction (ms): %d", elapsed_time);
+}
+
+- (IBAction) benchmarkReturnString:(id)the_sender
+{
+	int elapsed_time;
+	struct lua_State* lua_state;
+	int ret_flag;
+	AppDelegate* app_delegate;
+	app_delegate = [[UIApplication sharedApplication] delegate];
+	lua_state = [app_delegate luaState];
+	
+	/* Collect full to make sure benchmark is in clean state before running. */
+	lua_gc(lua_state, LUA_GCCOLLECT, 0);
+	
+	lua_getglobal(lua_state, "BenchmarkReturnString");
+	ret_flag = lua_pcall(lua_state, 0, 1, 0);
+	if(0 != ret_flag)
+	{
+		report(lua_state, ret_flag);
+	}
+	elapsed_time = lua_tointeger(lua_state, -1);
+	lua_pop(lua_state, 1);
+	NSLog(@"Elapsed time for returnString (ms): %d", elapsed_time);
+}
+
+- (IBAction) benchmarkPassString:(id)the_sender
+{
+	int elapsed_time;
+	struct lua_State* lua_state;
+	int ret_flag;
+	AppDelegate* app_delegate;
+	app_delegate = [[UIApplication sharedApplication] delegate];
+	lua_state = [app_delegate luaState];
+	
+	/* Collect full to make sure benchmark is in clean state before running. */
+	lua_gc(lua_state, LUA_GCCOLLECT, 0);
+	
+	lua_getglobal(lua_state, "BenchmarkPassString");
+	ret_flag = lua_pcall(lua_state, 0, 1, 0);
+	if(0 != ret_flag)
+	{
+		report(lua_state, ret_flag);
+	}
+	elapsed_time = lua_tointeger(lua_state, -1);
+	lua_pop(lua_state, 1);
+	NSLog(@"Elapsed time for passString (ms): %d", elapsed_time);
+}
+
+- (IBAction) benchmarkPassAndReturnString:(id)the_sender
+{
+	int elapsed_time;
+	struct lua_State* lua_state;
+	int ret_flag;
+	AppDelegate* app_delegate;
+	app_delegate = [[UIApplication sharedApplication] delegate];
+	lua_state = [app_delegate luaState];
+	
+	/* Collect full to make sure benchmark is in clean state before running. */
+	lua_gc(lua_state, LUA_GCCOLLECT, 0);
+	
+	lua_getglobal(lua_state, "BenchmarkPassAndReturnString");
+	ret_flag = lua_pcall(lua_state, 0, 1, 0);
+	if(0 != ret_flag)
+	{
+		report(lua_state, ret_flag);
+	}
+	elapsed_time = lua_tointeger(lua_state, -1);
+	lua_pop(lua_state, 1);
+	NSLog(@"Elapsed time for passAndReturnString (ms): %d", elapsed_time);
+}
+
+- (IBAction) benchmarkPass2String:(id)the_sender
+{
+	int elapsed_time;
+	struct lua_State* lua_state;
+	int ret_flag;
+	AppDelegate* app_delegate;
+	app_delegate = [[UIApplication sharedApplication] delegate];
+	lua_state = [app_delegate luaState];
+	
+	/* Collect full to make sure benchmark is in clean state before running. */
+	lua_gc(lua_state, LUA_GCCOLLECT, 0);
+	
+	lua_getglobal(lua_state, "BenchmarkPass2String");
+	ret_flag = lua_pcall(lua_state, 0, 1, 0);
+	if(0 != ret_flag)
+	{
+		report(lua_state, ret_flag);
+	}
+	elapsed_time = lua_tointeger(lua_state, -1);
+	lua_pop(lua_state, 1);
+	NSLog(@"Elapsed time for pass2String (ms): %d", elapsed_time);
+}
+
 
 
 @end
